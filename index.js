@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const { CustomFancyError } = require('./customError');
 // the above is equivalent to the next two lines below:
 // const dotenv = require('dotenv');
 // dotenv.config();
@@ -29,7 +30,7 @@ function app() {
         console.log("Input is not a number: " + Number.isNaN(n));
 
         if (Number.isNaN(n)) {
-            throw new Error("Input is not a number");
+            throw new CustomFancyError("Custom Error for NaN");
         }
 
         // Give number to pokePackage and get result
@@ -39,18 +40,20 @@ function app() {
             console.log(`Your pokemon is: ${pokeName}`)
         } catch (error) {
             console.log("Try a number between 1 and 1025!")
-        }
+        } finally {
+            let userInputToExit = prompt("Would you like to try again?");
+
+            if (userInputToExit == "y") {
+                userWantstoExit = false;
+            } else {
+                userWantstoExit = true;
+            }
+        } 
         
 
         // console.log("User entered: " + n);
 
-        let userInputToExit = prompt("Would you like to try again?");
-
-        if (userInputToExit == "y") {
-            userWantstoExit = false;
-        } else {
-            userWantstoExit = true;
-        }
+        
 
     } while (userWantstoExit == false);
 }
@@ -60,6 +63,7 @@ try {
 } catch (error) {
     console.log("Gracefully handling error...: ");
     console.log(error.message);
+    console.log(JSON.stringify(error));
     // Full error message (dev use only)
     //console.log(error);
 }
