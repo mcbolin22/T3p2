@@ -18,21 +18,40 @@ let promptInstance = promtPackage({sigint: true});
 
 
 
-let userWantstoExit = false;
+function app() {
+    let userWantstoExit = false;
 
-do {
-    let n = parseFloat(prompt('What number of Pokemon do you want to see?'));
-    console.log("User entered: " + n);
+    do {
+        let n = parseFloat(prompt('What number of Pokemon do you want to see?'));
 
-    let userInputToExit = prompt("Would you like to try again?");
+        console.log(typeof(n));
+        console.log("Input is not a number: " + Number.isNaN(n));
 
-    if (userInputToExit == "y") {
-        userWantstoExit = false;
-    } else {
-        userWantstoExit = true;
-    }
+        if (Number.isNaN(n)) {
+            throw new Error("Input is not a number");
+        }
 
-} while (userWantstoExit == false);
+        console.log("User entered: " + n);
+
+        let userInputToExit = prompt("Would you like to try again?");
+
+        if (userInputToExit == "y") {
+            userWantstoExit = false;
+        } else {
+            userWantstoExit = true;
+        }
+
+    } while (userWantstoExit == false);
+}
+
+try {
+    app();
+} catch (error) {
+    console.log("Gracefully handling error...: ");
+    console.log(error.message);
+    // Full error message (dev use only)
+    //console.log(error);
+}
 
 // console.log("User entered: " + n);
 // console.log(typeof(n));
@@ -40,12 +59,26 @@ do {
 // let nAsNumber = parseFloat(n);
 // console.log(typeof(nAsNumber));
 
-console.log(process.env.ENVIRONMENT_MESSAGE);
-
-console.log("Terminal app is running");
 
 
 
-pokePrinterFile.pokePrinter();
 
-console.log("Bye Bye, Terminal app finished!");
+
+
+
+
+
+
+
+
+
+
+// console.log(process.env.ENVIRONMENT_MESSAGE);
+
+// console.log("Terminal app is running");
+
+
+
+// pokePrinterFile.pokePrinter();
+
+// console.log("Bye Bye, Terminal app finished!");

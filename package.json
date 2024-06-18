@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "windows:watch": "CHOKIDAR_USEPOLLING=true nodemon index.js"
+    "windows:watch": "CHOKIDAR_USEPOLLING=true nodemon index.js",
+    "devPromptSync": "CHOKIDAR_USEPOLLING=true nodemon --no-stdin index.js"
   },
   "keywords": [],
   "author": "",
