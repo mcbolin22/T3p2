@@ -5,6 +5,7 @@ require('dotenv').config();
 // dotenv.config();
 
 const pokePrinterFile = require('./pokePrinter');
+const {pokeNameFromNumber} = require('./pokePrinter');
 
 // Style 1 for setting up prompt-sync
 var prompt = require('prompt-sync')({sigint: true});
@@ -31,7 +32,17 @@ function app() {
             throw new Error("Input is not a number");
         }
 
-        console.log("User entered: " + n);
+        // Give number to pokePackage and get result
+        // let pokeName = pokePrinterFile.pokeNameFromNumber(n);
+        try {
+            let pokeName = pokeNameFromNumber(n);
+            console.log(`Your pokemon is: ${pokeName}`)
+        } catch (error) {
+            console.log("Try a number between 1 and 1025!")
+        }
+        
+
+        // console.log("User entered: " + n);
 
         let userInputToExit = prompt("Would you like to try again?");
 
